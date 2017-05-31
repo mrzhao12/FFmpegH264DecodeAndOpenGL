@@ -1,6 +1,22 @@
 # FFmpegH264DecodeAndOpenGL
 FFmpegH264DecodeAndOpenGL(ffmpeg解码，h264解码，openGL渲染解码后的yuv)
 教程讲解：http://www.jianshu.com/p/2ff327a748d8
+
+修复OpenGLFrameView返回上一个控制器时崩溃的bug，（项目采用iOS-ARC模式，系统在推出控制器时自动调用dealloc方法里的release，不用程序员自己再次手写release，若是写了反而会崩溃，直接在- (void)dealloc
+{
+ if(_renderer!=nil)
+    {
+//        [_renderer release];
+        
+//        [_renderer performSelector:releaseSelector()];
+
+         _renderer = nil;
+        
+    }
+
+就可以了，注释的地方不要加上去，谢谢🙏）
+
+
 不管是手机摄像头还是一些芯片,他所采集到的实际上都是一帧一帧的图像,当帧数大于24-30的时候,对这些图像进行连续的播放,对人的感觉就像是视频在播放 . 常见的图片压缩格式有:png,jpg等等.
 
 我们为什么要进行压缩呢?做一个假设,一张图片是2M,如果一段视频是30帧,那么他如果不经过处理,这段视频一秒钟的数据量就是60M,这在本地或者局域网倒是问题比较小,对一些发达国家来说或许也勉强可以,但对中国目前的互联网环境来说,一分钟传输60M文件,还是压力很大的,所以我们便不得不去研究压缩,在这里顺便提一句,一位前辈曾告诉过我,音视频开发到了后面,网络就成了瓶颈,这句话刚开始其实还不是很明白,但现在已经开始理解起来了.
