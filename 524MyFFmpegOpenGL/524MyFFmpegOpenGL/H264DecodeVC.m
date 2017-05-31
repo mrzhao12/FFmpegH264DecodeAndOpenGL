@@ -30,6 +30,8 @@
 
 #pragma mark - lifeCycle
 - (void)dealloc {
+//    [super dealloc];
+
     printf("%s\n",__func__);
 }
 

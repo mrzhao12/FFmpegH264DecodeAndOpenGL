@@ -347,8 +347,10 @@ enum {
     {
 //        [_renderer release];
         
-        [_renderer performSelector:releaseSelector()];
-        _renderer= nil;
+//        [_renderer performSelector:releaseSelector()];
+
+         _renderer = nil;
+        
     }
     if (_framebuffer) {
         glDeleteFramebuffers(1, &_framebuffer);
@@ -367,18 +369,24 @@ enum {
 	
 	if ([EAGLContext currentContext] == _context) {
 		[EAGLContext setCurrentContext:nil];
-        [_context performSelector:releaseSelector()];
+        
+        
+        
+//   [_context performSelector:releaseSelector()];
+        
 //        [_context release];
         _context = nil;
+        
 	}
     
 //    [super dealloc];
 }
-//ARC下手动release
+////ARC下手动release
 static SEL releaseSelector(){
+
     return NSSelectorFromString(@"release");
 }
-
+//
 - (void)layoutSubviews
 {
     glBindRenderbuffer(GL_RENDERBUFFER, _renderbuffer);

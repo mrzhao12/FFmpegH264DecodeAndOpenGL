@@ -21,6 +21,8 @@ static NSString *kCellID = @"kCellID";
 @implementation ViewController
 #pragma mark - lifeCycle
 - (void)dealloc {
+//    [super dealloc];
+
     printf("%s",__func__);
 }
 

@@ -22,13 +22,17 @@
 //yuv数据高度
 #define videoH 232
 @interface OpenGLVC ()
-
+@property (nonatomic, strong) OpenglView *openglview;
 @end
 
 @implementation OpenGLVC
 
 #pragma mark - lifeCycle
 - (void)dealloc {
+    
+//    [_openglview release];
+    NSLog(@"OpenGLVC--dealloc");
+//    [super dealloc];
     printf("%s\n",__func__);
 }
 
@@ -44,10 +48,10 @@
  开始渲染
  */
 -(void)play{
-    OpenglView * openglview = [[OpenglView alloc]initWithFrame:CGRectMake(0, 64, screenSize.width, 300)];
-    [self.view addSubview:openglview];
+   self.openglview = [[OpenglView alloc]initWithFrame:CGRectMake(0, 64, screenSize.width, 300)];
+    [self.view addSubview:self.openglview];
     
-    [openglview setVideoSize:videoW height:videoH];
+    [self.openglview setVideoSize:videoW height:videoH];
     NSString * path = [[NSBundle mainBundle]pathForResource:filePathName
                                                      ofType:nil];
     
@@ -64,7 +68,7 @@
         
         //        [openglview displayYUV420pData:pFrameRGB width:640 height:480];
         //        [openglview displayYUV420pData:pFrameRGB width:848 height:480];
-        [openglview displayYUV420pData:pFrameRGB width:680 height:232];
+        [self.openglview displayYUV420pData:pFrameRGB width:680 height:232];
         
         
         
