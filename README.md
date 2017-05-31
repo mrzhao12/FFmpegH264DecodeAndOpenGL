@@ -2,7 +2,8 @@
 FFmpegH264DecodeAndOpenGL(ffmpeg解码，h264解码，openGL渲染解码后的yuv)
 教程讲解：http://www.jianshu.com/p/2ff327a748d8
 
-修复OpenGLFrameView返回上一个控制器时崩溃的bug，（项目采用iOS-ARC模式，系统在推出控制器时自动调用dealloc方法里的release，不用程序员自己再次手写release，若是写了反而会崩溃，直接在- (void)dealloc
+修复OpenGLFrameView返回上一个控制器时崩溃的bug，（项目采用iOS-ARC模式，系统在推出控制器时自动调用dealloc方法里的release，不用程序员自己再次手写release，若是写了反而会崩溃，直接在
+- (void)dealloc
 {
  if(_renderer!=nil)
     {
